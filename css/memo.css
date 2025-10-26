@@ -23,7 +23,7 @@ body{
 }
 
 header, main, footer, h1, h2, h3, p, div, table, .field, .btn-area, .filler01 {
-    margin: 0.5em 0em 0em 0em;
+    margin: 0.5em 0 0 0;
     padding: 0.1em;
 }
 th, td {
@@ -64,17 +64,13 @@ label {
 }
 label::after {
   margin-left: 1.0em;
-  padding: 0px брх өрх 6рх;
+  padding: 0 6px 0 6px;
   border-radius: 4px;
   font-size: 0.6em;
   color: white;
   background-color: #C44;
   content:"必須";
 }
-
-
-/* ★自分でコーディングする！(code by yourself) ... 疑似要素「::after」を使って、「必須」の文字を定義する。*/
-
 /* テキストエリア */
 textarea{
   position: absolute;
@@ -85,8 +81,6 @@ textarea{
 textarea**::placeholder{
   color: #46aef7;
 }
-/* ★自分でコーディングする！(code by yourself)...  疑似要素「::placeholder」を使って、textareaの文字の色を定義する。*/
-
 /* ボタン */
 .btn-area{
   margin-left:3em;
