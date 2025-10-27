@@ -27,7 +27,7 @@ function saveLocalStorage() {
                 return;
             } else {
                 localStorage.setItem(key, value);
-                let w_msg = "LocalStorageに" + key + " " + value + "を保存 “を保存(ほぞん)しました。";
+                let w_msg = "LocalStorageに" + key + " " + value + "を保存(ほぞん)しました。"; 
                 window.alert(w_msg);
                 document.getElementById("textKey").value = "";
                 document.getElementById("textMemo").value = "";

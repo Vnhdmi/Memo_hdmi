@@ -78,7 +78,7 @@ textarea{
   left: 3em;
 }
 /*placeholder*/
-textarea**::placeholder{
+textarea::placeholder{
   color: #46aef7;
 }
 /* ボタン */
