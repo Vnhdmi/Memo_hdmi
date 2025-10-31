@@ -8,6 +8,7 @@ window.addEventListener("DOMContentLoaded",
             window.alert("このブラウザはLocal Storage機能が実装されていません");
             return;
         } else {
+
             viewStorage(); //get data from storage
             saveLocalStorage(); //2.localStorageへの保存 (ほぞん) |
         }
@@ -23,7 +24,7 @@ function saveLocalStorage() {
             const key = document.getElementById("textKey").value;
             const value = document.getElementById("textMemo").value;
             // 値の入力チェック
-            if (key == "" || value == "") {
+            if (key=="" || value== "") {
                 window.alert("Key、Memoはいずれも必須 (ひっす)です。");
                 return;
             } else {
@@ -34,15 +35,15 @@ function saveLocalStorage() {
                 document.getElementById("textKey").value = "";
                 document.getElementById("textMemo").value = "";
             }
-        }
+        },false
     );
 };
 
 function  viewStorage() {
-    const list = document.getElementsByClassName("list");
+    const list = document.getElementById("list");
     while (list.rows[0]) list.deleteRow(0);
 
-    for (let i = 0; i < localStorage; i++) {
+    for (let i = 0; i < localStorage.length; i++) {
         let w_key = localStorage.key(i);
 
         let tr = document.createElement("tr");
@@ -50,14 +51,16 @@ function  viewStorage() {
         let td2 = document.createElement("td");
         let td3 = document.createElement("td");
 
-        list[i].appendChild(tr);
+        // list[i].appendChild(tr);
+
+        list.appendChild(tr);
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
 
         td1.innerHTML = "<input name='radio1' type='radio'>";
         td2.innerHTML = w_key;
-        td3.innerHTML = localStorage .getItem(w_key);
+        td3.innerHTML = localStorage.getItem(w_key);
 
     }
-};
+}

@@ -138,7 +138,6 @@ textarea::placeholder{
   cursor: pointer; /*カーソルをポインターの形（かたち）にする*/
 }
 
-テーブル
 table{
 table-layout: fixed; /*1行目に指定された列幅のや数値をテーブル全体に適用*/
 width: 80%;
@@ -146,12 +145,14 @@ margin-left:3em;
 border-collapse: collapse; /* セルのボーダー 重ねて(かさねて)表示(ひょうじ) */
 opacity:0.9; 
 }
+
 table th {
 background:grey;
 }
+
 table th, table td{
-padding: 8.5em 8;
-border: solid 8.1em #fff;
+padding: 0.5em 0;
+border: solid 0.1em #fff;
 color: white;
 text-align: center;
 }
@@ -165,6 +166,6 @@ width: 10%;
 .width30 {
   width: 30%;
   }
-  .width60 {
-    width: 60%;
+.width60 {
+  width: 60%;
     }
