@@ -22,7 +22,7 @@
     <main>
       <div class="field01">
         <label for="textKey">Key:</label>
-        <textarea name="textKey" id="textKey" cols="40" rows="1" autofocus placeholder="キーを入力してください"></textarea>
+        <textarea name="textKey" id="textKey" cols="40" row="1" autofocus placeholder="キーを入力してください"></textarea>
       </div>
 
       <div class="field02">
@@ -44,9 +44,22 @@
         </tbody>
       </table>
 
+      <div class="btn-area">
+        <input id="select" type="submit" class="btn" value="選択">
+        </div>
+
+      <!-- test -->
+      <div class ="delete">
+        <button id="delete_btn" type="button" onclick="localStorage.clear()">Delete</button>
+      </div>
+
     </main>
 
     <script src="js/memo.js"></script>
+    <footer>
+      <p>Copyright 2025 S247027 & CAO VAN HIEU</p>
+  </footer>
+
   </body>
 
 </html>
