@@ -129,7 +129,7 @@ textarea::placeholder {
   text-align: left;
 }
 
-#save , #select {
+#save , #select , #del {
   padding: 0.5em;
   border-radius: 0.3em;
   color: whitesmoke;
@@ -186,10 +186,7 @@ textarea::placeholder {
 }
 
 footer>p {
-  position: absolute;
-  /*←絶対位置*/
-  bottom: 5px;
-  /*下に固定*/
+  position: relative;
   width: 100%;
   margin: 0px;
   padding: 1px;

@@ -11,6 +11,7 @@ window.addEventListener("DOMContentLoaded",
 
             viewStorage(); //get data from storage
             saveLocalStorage(); //2.localStorageへの保存 (ほぞん) |
+            delLocalStorage();
             selectTable();
         }
     }
@@ -69,7 +70,7 @@ function selectTable() {
     const select = document.getElementById("select");
     select.addEventListener("click",
         function (e) {
-            e.preventDefault;
+            e.preventDefault();
             selectRadioBtn();
 
         },
@@ -83,14 +84,37 @@ function selectRadioBtn() {
     const radio1 = document.getElementsByName("radio1");
     const table1 = document.getElementById("table1");
 
-    for(let i=0; i < radio1.length ; i++){
-        if(radio1[i].checked){
-            document.getElementById("textKey").value=table1.rows[i+1].cells[1].firstChild.data;
-            document.getElementById("textMemo").value=table1.rows[i+1].cells[2].firstChild.data;
-            return w_sel ="1";
+    for (let i = 0; i < radio1.length; i++) {
+        if (radio1[i].checked) {
+            document.getElementById("textKey").value = table1.rows[i + 1].cells[1].firstChild.data;
+            document.getElementById("textMemo").value = table1.rows[i + 1].cells[2].firstChild.data;
+            return w_sel = "1";
         }
 
     }
     window.alert("一つ選んでくださいませ。")
 }
-//no thing 
+//no thing
+
+function delLocalStorage() {
+    const del = document.getElementById("del");
+    del.addEventListener("click",
+        function (e) {
+            e.preventDefault();
+            let w_sel = 0;
+            w_sel = selectRadioBtn();
+
+            // 値の入力チェック
+            if (w_sel === "1") {
+                const key = document.getElementById("textKey").value;
+                const value = document.getElementById("textMemo").value;
+                localStorage.removeItem(key);
+                let w_msg = `LocalStorage から キー「${key}」と値「${value}」を削除しました。`;
+                window.alert(w_msg);
+                viewStorage();
+                document.getElementById("textKey").value = "";
+                document.getElementById("textMemo").value = "";
+            }
+        }, false
+    );
+};
