@@ -12,6 +12,7 @@ window.addEventListener("DOMContentLoaded",
             viewStorage(); //get data from storage
             saveLocalStorage(); //2.localStorageへの保存 (ほぞん) |
             delLocalStorage();
+            allClearLocalStorage();
             selectTable();
         }
     }
@@ -63,6 +64,10 @@ function viewStorage() {
         td1.innerHTML = "<input name='radio1' type='radio'>";
         td2.innerHTML = w_key;
         td3.innerHTML = localStorage.getItem(w_key);
+        $("#table1").tablesorter({
+            sortList:[[1,0]]
+        });
+        $("#table1").trigger("update");
     }
 }
 
@@ -112,6 +117,27 @@ function delLocalStorage() {
                 let w_msg = `LocalStorage から キー「${key}」と値「${value}」を削除しました。`;
                 window.alert(w_msg);
                 viewStorage();
+                document.getElementById("textKey").value = "";
+                document.getElementById("textMemo").value = "";
+            }
+        }, false
+    );
+};
+
+function allClearLocalStorage() {
+    const allClear = document.getElementById("allClear");
+    allClear.addEventListener("click",
+        function (e) {
+            e.preventDefault();
+            let w_confirm = confirm("LocalStorageのデータをすべて削除（allclear）します。\n よろしいですか。");
+            // 値の入力チェック
+            // if (w_confirm==true) {
+            if (w_confirm) {
+
+                localStorage.clear();
+                viewStorage();
+                let w_msg = `LocalStorageのデータすべて削除（all clear）しました。`;
+                window.alert(w_msg);
                 document.getElementById("textKey").value = "";
                 document.getElementById("textMemo").value = "";
             }
