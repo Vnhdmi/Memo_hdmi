@@ -126,6 +126,7 @@ function delLocalStorage() {
                     document.getElementById("textKey").value = "";
                     document.getElementById("textMemo").value = "";
                 }//version-up1-add //ahhsfhsaf
+                //gfdgff
                 
             }
         }, false
