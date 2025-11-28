@@ -31,12 +31,16 @@ function saveLocalStorage() {
                 window.alert("Key、Memoはいずれも必須 (ひっす)です。");
                 return;
             } else {
-                localStorage.setItem(key, value);
-                viewStorage();
-                let w_msg = "LocalStorageに" + key + " " + value + "を保存(ほぞん)しました。";
-                window.alert(w_msg);
-                document.getElementById("textKey").value = "";
-                document.getElementById("textMemo").value = "";
+                let w_confirm = confirm("LocalStorage " + key + " " + value + "を保存(ほぞん)しますか " )
+                if(w_confirm){ //version-up1-add
+                    localStorage.setItem(key, value);
+                    viewStorage();
+                    let w_msg = "LocalStorageに" + key + " " + value + "を保存(ほぞん)しました。";
+                    window.alert(w_msg);
+                    document.getElementById("textKey").value = "";
+                    document.getElementById("textMemo").value = "";
+                } //version-up1-add
+                
             }
         }, false
     );
@@ -113,12 +117,16 @@ function delLocalStorage() {
             if (w_sel === "1") {
                 const key = document.getElementById("textKey").value;
                 const value = document.getElementById("textMemo").value;
-                localStorage.removeItem(key);
-                let w_msg = `LocalStorage から キー「${key}」と値「${value}」を削除しました。`;
-                window.alert(w_msg);
-                viewStorage();
-                document.getElementById("textKey").value = "";
-                document.getElementById("textMemo").value = "";
+                let w_confirm = confirm (`LocalStorage から キー「${key}」と値「${value}」を削除しましすか。`);
+                if(w_confirm){//version-up1-add
+                    localStorage.removeItem(key);
+                    let w_msg = `LocalStorage から キー「${key}」と値「${value}」を削除しました。`
+                    window.alert(w_msg);
+                    viewStorage();
+                    document.getElementById("textKey").value = "";
+                    document.getElementById("textMemo").value = "";
+                }//version-up1-add
+                
             }
         }, false
     );
@@ -136,7 +144,7 @@ function allClearLocalStorage() {
 
                 localStorage.clear();
                 viewStorage();
-                let w_msg = `LocalStorageのデータすべて削除（all clear）しました。`;
+                let w_msg =  `LocalStorageのデータすべて削除（all clear）しました。`;
                 window.alert(w_msg);
                 document.getElementById("textKey").value = "";
                 document.getElementById("textMemo").value = "";
