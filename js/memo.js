@@ -31,8 +31,8 @@ function saveLocalStorage() {
                 window.alert("Key、Memoはいずれも必須 (ひっす)です。");
                 return;
             } else {
-                let w_confirm = confirm("LocalStorage " + key + " " + value + "を保存(ほぞん)しますか " )
-                if(w_confirm){ //version-up1-add
+                let w_confirm = confirm("LocalStorage " + key + " " + value + "を保存(ほぞん)しますか ")
+                if (w_confirm) { //version-up1-add
                     localStorage.setItem(key, value);
                     viewStorage();
                     let w_msg = "LocalStorageに" + key + " " + value + "を保存(ほぞん)しました。";
@@ -40,7 +40,7 @@ function saveLocalStorage() {
                     document.getElementById("textKey").value = "";
                     document.getElementById("textMemo").value = "";
                 } //version-up1-add
-                
+
             }
         }, false
     );
@@ -65,11 +65,11 @@ function viewStorage() {
         tr.appendChild(td2);
         tr.appendChild(td3);
 
-        td1.innerHTML = "<input name='radio1' type='radio'>";
+        td1.innerHTML = "<input name='chkbox1' type='checkbox'>";
         td2.innerHTML = w_key;
         td3.innerHTML = localStorage.getItem(w_key);
         $("#table1").tablesorter({
-            sortList:[[1,0]]
+            sortList: [[1, 0]]
         });
         $("#table1").trigger("update");
     }
@@ -80,29 +80,13 @@ function selectTable() {
     select.addEventListener("click",
         function (e) {
             e.preventDefault();
-            selectRadioBtn();
+            selectCheckBox();
 
-        },
+        },false
 
     );
 }
 
-function selectRadioBtn() {
-    let w_sel = 0;
-
-    const radio1 = document.getElementsByName("radio1");
-    const table1 = document.getElementById("table1");
-
-    for (let i = 0; i < radio1.length; i++) {
-        if (radio1[i].checked) {
-            document.getElementById("textKey").value = table1.rows[i + 1].cells[1].firstChild.data;
-            document.getElementById("textMemo").value = table1.rows[i + 1].cells[2].firstChild.data;
-            return w_sel = "1";
-        }
-
-    }
-    window.alert("一つ選んでくださいませ。")
-}
 //no thing
 
 function delLocalStorage() {
@@ -111,14 +95,14 @@ function delLocalStorage() {
         function (e) {
             e.preventDefault();
             let w_sel = 0;
-            w_sel = selectRadioBtn();
+            w_sel = selectCheckBox();
 
             // 値の入力チェック
             if (w_sel === "1") {
                 const key = document.getElementById("textKey").value;
                 const value = document.getElementById("textMemo").value;
-                let w_confirm = confirm (`LocalStorage から キー「${key}」と値「${value}」を削除しましすか。`);
-                if(w_confirm){//version-up1-add
+                let w_confirm = confirm(`LocalStorage から キー「${key}」と値「${value}」を削除しましすか。`);
+                if (w_confirm) {//version-up1-add
                     localStorage.removeItem(key);
                     let w_msg = `LocalStorage から キー「${key}」と値「${value}」を削除しました。`
                     window.alert(w_msg);
@@ -127,7 +111,7 @@ function delLocalStorage() {
                     document.getElementById("textMemo").value = "";
                 }//version-up1-add //ahhsfhsaf
                 //gfdgff
-                
+
             }
         }, false
     );
@@ -145,7 +129,7 @@ function allClearLocalStorage() {
 
                 localStorage.clear();
                 viewStorage();
-                let w_msg =  `LocalStorageのデータすべて削除（all clear）しました。`;
+                let w_msg = `LocalStorageのデータすべて削除（all clear）しました。`;
                 window.alert(w_msg);
                 document.getElementById("textKey").value = "";
                 document.getElementById("textMemo").value = "";
@@ -153,3 +137,34 @@ function allClearLocalStorage() {
         }, false
     );
 };
+
+function selectCheckBox(){
+    let w_sel = "0";
+    let w_cnt = 0;
+    let w_textKey = "";
+    let w_textMemo = "";
+
+    const chkbox1 = document.getElementsByName("chkbox1");
+    const table1 = document.getElementById("table1");
+    
+
+    for(let i = 0; i < chkbox1.length; i++) {
+        if(chkbox1[i].checked){
+            if(w_cnt===0){
+                w_textKey = table1.rows[i+1].cells[1].firstChild.data;
+                w_textMemo = table1.rows[i+1].cells[2].firstChild.data;
+
+            }
+            w_cnt++;
+
+        }
+    }
+    document.getElementById("textKey").value = w_textKey;
+    document.getElementById("textMemo").value = w_textMemo;
+    if(w_cnt ===1) {
+         return "1" ;
+
+    }else{
+        window.alert("１つ選択（select）してください。");
+    }
+}
