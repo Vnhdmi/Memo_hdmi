@@ -182,7 +182,7 @@ function selectCheckBox(mode) {
     if(w_cnt >= 1) {
         return w_cnt;
     }else{
-        window.alert("１つ選択（select）してください。");
+        window.alert("１つ以上選択（select）してください。");
     }
    }
 }
