@@ -80,37 +80,45 @@ function selectTable() {
     select.addEventListener("click",
         function (e) {
             e.preventDefault();
-            selectCheckBox();
+            selectCheckBox("select");
 
-        },false
+        }, false
 
     );
 }
 
 //no thing
-
+// del ver 3.0 
 function delLocalStorage() {
     const del = document.getElementById("del");
     del.addEventListener("click",
         function (e) {
             e.preventDefault();
-            let w_sel = 0;
-            w_sel = selectCheckBox();
+
+            const chkbox1 = document.getElementsByName("chkbox1");
+            const table1 = document.getElementById("table1");
+            // let w_sel = 0; 2025/12/12
+            // w_sel = selectCheckBox();
+            let w_cnt = 0;
+            w_cnt = selectCheckBox("del");
 
             // 値の入力チェック
-            if (w_sel === "1") {
-                const key = document.getElementById("textKey").value;
-                const value = document.getElementById("textMemo").value;
-                let w_confirm = confirm(`LocalStorage から キー「${key}」と値「${value}」を削除しましすか。`);
-                if (w_confirm) {//version-up1-add
-                    localStorage.removeItem(key);
-                    let w_msg = `LocalStorage から キー「${key}」と値「${value}」を削除しました。`
-                    window.alert(w_msg);
+            if (w_cnt >= 1) {
+                // const key = document.getElementById("textKey").value;
+                // const value = document.getElementById("textMemo").value;
+                let w_confirm = confirm("LocalStorageから選択されている" + w_cnt + "件を削除（delete）しましたか 。`");
+                if (w_confirm ) {//version-up1-add
+                    for (let i = 0; i < chkbox1.length; i++) {
+                        if (chkbox1[i].checked) {
+                            let delkey = table1.rows[i + 1].cells[1].firstChild.data ;
+                            localStorage.removeItem(delkey);
+                        } //ver 3
+                    }
                     viewStorage();
-                    document.getElementById("textKey").value = "";
-                    document.getElementById("textMemo").value = "";
-                }//version-up1-add //ahhsfhsaf
-                //gfdgff
+                    let w_msg = "LocalStorageから選択されている" + w_cnt + "件を削除（delete）しました 。`";
+                    window.alert(w_msg);
+                }//version-up1-add // del on 2025/12/12
+
 
             }
         }, false
@@ -138,21 +146,21 @@ function allClearLocalStorage() {
     );
 };
 
-function selectCheckBox(){
+function selectCheckBox(mode) {
     let w_sel = "0";
     let w_cnt = 0;
     let w_textKey = "";
     let w_textMemo = "";
 
     const chkbox1 = document.getElementsByName("chkbox1");
-    const table1 = document.getElementById("table1");
-    
+    const table1 = document.getElementById("table1"); 
 
-    for(let i = 0; i < chkbox1.length; i++) {
-        if(chkbox1[i].checked){
-            if(w_cnt===0){
-                w_textKey = table1.rows[i+1].cells[1].firstChild.data;
-                w_textMemo = table1.rows[i+1].cells[2].firstChild.data;
+
+    for (let i = 0; i < chkbox1.length; i++) {
+        if (chkbox1[i].checked) {
+            if (w_cnt === 0) {
+                w_textKey = table1.rows[i + 1].cells[1].firstChild.data;
+                w_textMemo = table1.rows[i + 1].cells[2].firstChild.data;
 
             }
             w_cnt++;
@@ -161,10 +169,20 @@ function selectCheckBox(){
     }
     document.getElementById("textKey").value = w_textKey;
     document.getElementById("textMemo").value = w_textMemo;
-    if(w_cnt ===1) {
-         return "1" ;
+   if(mode === "select") {
+    if (w_cnt === 1) {
+        return "1";
 
+    } else {
+        window.alert("１つ選択（select）してください。");
+    }
+   }
+
+   if(mode === "del") {
+    if(w_cnt >= 1) {
+        return w_cnt;
     }else{
         window.alert("１つ選択（select）してください。");
     }
+   }
 }
