@@ -28,18 +28,45 @@ function saveLocalStorage() {
             const value = document.getElementById("textMemo").value;
             // 値の入力チェック
             if (key == "" || value == "") {
-                window.alert("Key、Memoはいずれも必須 (ひっす)です。");
+                Swal.fire({
+                    title: "Memo app",
+                    text: "Key、Memoはいずれも必須 (ひっす)です。",
+                    icon: "error"
+                });
+                // window.alert("Key、Memoはいずれも必須 (ひっす)です。");
                 return;
             } else {
-                let w_confirm = confirm("LocalStorage " + key + " " + value + "を保存(ほぞん)しますか ")
-                if (w_confirm) { //version-up1-add
-                    localStorage.setItem(key, value);
-                    viewStorage();
-                    let w_msg = "LocalStorageに" + key + " " + value + "を保存(ほぞん)しました。";
-                    window.alert(w_msg);
-                    document.getElementById("textKey").value = "";
-                    document.getElementById("textMemo").value = "";
-                } //version-up1-add
+                // let w_confirm = confirm("LocalStorage " + key + " " + value + "を保存(ほぞん)しますか ")
+                // if (w_confirm) { //version-up1-add
+                //     localStorage.setItem(key, value);
+                //     viewStorage();
+                //     let w_msg = "LocalStorageに" + key + " " + value + "を保存(ほぞん)しました。";
+                //     window.alert(w_msg);
+                //     document.getElementById("textKey").value = "";
+                //     document.getElementById("textMemo").value = "";
+                // } //version-up1-add
+
+                Swal.fire({
+                    //version-up-4
+                    title: "LocalStorage " + key + " " + value + "を保存(ほぞん)しますか ",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.setItem(key, value);
+                        viewStorage();
+                        Swal.fire({
+                            title: "Memo app",
+                            icon: "success",
+                            text: "LocalStorageに" + key + " " + value + "を保存(ほぞん)しました。",
+                            draggable: true
+                        });
+                        document.getElementById("textKey").value = "";
+                        document.getElementById("textMemo").value = "";
+
+                    }
+                });
 
             }
         }, false
@@ -104,21 +131,42 @@ function delLocalStorage() {
 
             // 値の入力チェック
             if (w_cnt >= 1) {
-                // const key = document.getElementById("textKey").value;
-                // const value = document.getElementById("textMemo").value;
-                let w_confirm = confirm("LocalStorageから選択されている" + w_cnt + "件を削除（delete）しましたか 。`");
-                if (w_confirm ) {//version-up1-add
-                    for (let i = 0; i < chkbox1.length; i++) {
-                        if (chkbox1[i].checked) {
-                            let delkey = table1.rows[i + 1].cells[1].firstChild.data ;
-                            localStorage.removeItem(delkey);
-                        } //ver 3
-                    }
-                    viewStorage();
-                    let w_msg = "LocalStorageから選択されている" + w_cnt + "件を削除（delete）しました 。`";
-                    window.alert(w_msg);
-                }//version-up1-add // del on 2025/12/12
 
+                // let w_confirm = confirm("LocalStorageから選択されている" + w_cnt + "件を削除（delete）しましたか 。`");
+                // if (w_confirm) {//version-up1-add
+                //     for (let i = 0; i < chkbox1.length; i++) {
+                //         if (chkbox1[i].checked) {
+                //             let delkey = table1.rows[i + 1].cells[1].firstChild.data;
+                //             localStorage.removeItem(delkey);
+                //         } //ver 3
+                //     }
+                //     viewStorage();
+                //     let w_msg = "LocalStorageから選択されている" + w_cnt + "件を削除（delete）しました 。`";
+                //     window.alert(w_msg);
+                // }//version-up1-add // del on 2025/12/12
+                Swal.fire({
+                    title: "LocalStorageから選択されている" + w_cnt + "件を削除（delete）しましたか 。",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                            for (let i = 0; i < chkbox1.length; i++) {
+                                if (chkbox1[i].checked) {
+                                    let delkey = table1.rows[i + 1].cells[1].firstChild.data;
+                                    localStorage.removeItem(delkey);
+
+                                }
+                            }
+                              Swal.fire({
+                            title: "Memo app",
+                            icon: "success",
+                            text: "LocalStorageから選択されている" + w_cnt + "件を削除（delete）しました 。`",
+                            draggable: true
+                        });
+                            viewStorage();
+                    }
+                });
 
             }
         }, false
@@ -130,18 +178,40 @@ function allClearLocalStorage() {
     allClear.addEventListener("click",
         function (e) {
             e.preventDefault();
-            let w_confirm = confirm("LocalStorageのデータをすべて削除（allclear）します。\n よろしいですか。");
-            // 値の入力チェック
-            // if (w_confirm==true) {
-            if (w_confirm) {
+            // let w_confirm = confirm("LocalStorageのデータをすべて削除（allclear）します。\n よろしいですか。");
+            // // 値の入力チェック
+            // // if (w_confirm==true) {
+            // if (w_confirm) {
 
-                localStorage.clear();
+            //     localStorage.clear();f
+            //     viewStorage();
+            //     let w_msg = `LocalStorageのデータすべて削除（all clear）しました。`;
+            //     window.alert(w_msg);
+            //     document.getElementById("textKey").value = "";
+            //     document.getElementById("textMemo").value = "";
+            // }
+
+              Swal.fire({
+                    title: "LocalStorageのデータをすべて削除（allclear）します。\n よろしいですか。",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                         localStorage.clear();
                 viewStorage();
-                let w_msg = `LocalStorageのデータすべて削除（all clear）しました。`;
-                window.alert(w_msg);
                 document.getElementById("textKey").value = "";
                 document.getElementById("textMemo").value = "";
-            }
+                              Swal.fire({
+                            title: "Memo app",
+                            icon: "success",
+                            text: "LocalStorageのデータすべて削除（all clear）しました。",
+                            draggable: true
+                        });
+                            viewStorage();
+                    }
+                });
+
         }, false
     );
 };
@@ -153,7 +223,7 @@ function selectCheckBox(mode) {
     let w_textMemo = "";
 
     const chkbox1 = document.getElementsByName("chkbox1");
-    const table1 = document.getElementById("table1"); 
+    const table1 = document.getElementById("table1");
 
 
     for (let i = 0; i < chkbox1.length; i++) {
@@ -169,20 +239,30 @@ function selectCheckBox(mode) {
     }
     document.getElementById("textKey").value = w_textKey;
     document.getElementById("textMemo").value = w_textMemo;
-   if(mode === "select") {
-    if (w_cnt === 1) {
-        return "1";
+    if (mode === "select") {
+        if (w_cnt === 1) {
+            return "1";
 
-    } else {
-        window.alert("１つ選択（select）してください。");
+        } else {
+            // window.alert("１つ選択（select）してください。");
+            Swal.fire({
+                title: "Memo app",
+                text: "Key、Memoはいずれも必須 (ひっす)です。",
+                icon: "error"
+            });
+        }
     }
-   }
 
-   if(mode === "del") {
-    if(w_cnt >= 1) {
-        return w_cnt;
-    }else{
-        window.alert("１つ以上選択（select）してください。");
+    if (mode === "del") {
+        if (w_cnt >= 1) {
+            return w_cnt;
+        } else {
+            // window.alert("１つ以上選択（select）してください。");
+             Swal.fire({
+                    title: "Memo app",
+                    text: "１つ以上選択（select）してください。",
+                    icon: "error"
+                });
+        }
     }
-   }
 }
