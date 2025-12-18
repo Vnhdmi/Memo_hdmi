@@ -20,7 +20,6 @@ body {
 
 header,
 main,
-footer,
 h1,
 h2,
 h3,
@@ -231,16 +230,20 @@ textarea::placeholder {
     /*カーソルをポインターの形（かたち）にする*/
 }
 
-footer>p {
-    position: relative;
-    bottom: 5px;
+footer {
+    margin-top: auto;
+    padding: 2em 0;
+    background-color: #11111144;
+}
+
+footer > p {
     width: 100%;
-    margin: 0px;
-    padding: 1px;
-    color: whitesmoke;
-    font: 1em Rajdhani;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 1.4rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
     text-align: center;
-    background: rgba(1, 24, 31, 0.7);
 }
 
 table {
