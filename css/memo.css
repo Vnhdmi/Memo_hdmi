@@ -179,32 +179,6 @@ textarea::placeholder {
 
 /* https://www.design-memo.com/coding/css-media-queries */
 
-
-/********************************************************/
-
-
-/* mobileのときのスタイル */
-
-@media screen and (max-width: 480px) {
-    /* ラベル */
-    label {
-        left: 0.1em;
-    }
-    /* テキストエリア */
-    textarea {
-        left: 0.1em;
-    }
-    /* ボタン */
-    .btn-area {
-        margin-left: 0.1em;
-    }
-    table {
-        width: 100%;
-        margin-left: 0.1em;
-    }
-}
-
-
 /*******************************************************/
 
 
@@ -289,4 +263,75 @@ table tr {
     --border: #e0e0e0;
     --bg: #ffffff;
     --text-sub: #777;
+}
+/* mobileのときのスタイル */
+@media screen and (max-width: 480px) {
+
+    body {
+        font-size: 1.5rem;
+        text-align: left;
+        padding: 0 1em;
+    }
+
+    h1, h2 {
+        text-align: center;
+    }
+
+    /* Field */
+    .field01,
+    .field02 {
+        padding: 0.5em 0;
+    }
+
+    /* Label */
+    label {
+        margin-bottom: 0.3em;
+        font-size: 1.3rem;
+    }
+
+    /* Textarea */
+    textarea {
+        width: 100%;
+        font-size: 1.5rem;
+        padding: 1em;
+    }
+
+    /* Button area */
+    .btn-area {
+        margin: 1em 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+    }
+
+    /* Buttons */
+    #save,
+    #select,
+    #del,
+    #allClear,
+    #btn99 {
+        width: 100%;
+        font-size: 1.6rem;
+        padding: 0.8em;
+        border-radius: 8px;
+    }
+
+    /* Table wrapper (scroll) */
+    table {
+        width: 100%;
+        margin: 1em 0;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    table th,
+    table td {
+        font-size: 1.3rem;
+        padding: 0.6em;
+    }
+
+    footer {
+        margin-top: 2em;
+    }
 }

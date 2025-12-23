@@ -29,6 +29,7 @@ function saveLocalStorage() {
             // 値の入力チェック
             if (key == "" || value == "") {
                 Swal.fire({
+
                     title: "Memo app",
                     text: "Key、Memoはいずれも必須 (ひっす)です。",
                     icon: "error"
@@ -48,7 +49,8 @@ function saveLocalStorage() {
 
                 Swal.fire({
                     //version-up-4
-                    title: "LocalStorage " + key + " " + value + "を保存(ほぞん)しますか ",
+                    title: "Memo app",
+                    text: "LocalStorage " + key + " " + value + "を保存(ほぞん)しますか ",
                     icon: "question",
                     showCancelButton: true,
                     confirmButtonText: "OK",
@@ -84,6 +86,7 @@ function viewStorage() {
         let td1 = document.createElement("td");
         let td2 = document.createElement("td");
         let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
 
         // list[i].appendChild(tr);
 
@@ -91,10 +94,12 @@ function viewStorage() {
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
+        tr.appendChild(td4);
 
         td1.innerHTML = "<input name='chkbox1' type='checkbox'>";
         td2.innerHTML = w_key;
-        td3.innerHTML = localStorage.getItem(w_key);
+        td3.innerHTML = localStorage.getItem(w_key)
+        td4.innerHTML = "<img src ='img/trash_icon.png' class = 'trash'> ";
         $("#table1").tablesorter({
             sortList: [[1, 0]]
         });
@@ -145,7 +150,8 @@ function delLocalStorage() {
                 //     window.alert(w_msg);
                 // }//version-up1-add // del on 2025/12/12
                 Swal.fire({
-                    title: "LocalStorageから選択されている" + w_cnt + "件を削除（delete）しましたか 。",
+                    title: "Memo app",
+                    text: "LocalStorageから選択されている" + w_cnt + "件を削除（delete）しましたか 。",
                     icon: "question",
                     showCancelButton: true,
                     confirmButtonText: "OK",
@@ -171,6 +177,37 @@ function delLocalStorage() {
             }
         }, false
     );
+    const table1 = document.getElementById("table1");
+
+    table1.addEventListener("click", (e) => {
+        if (e.target.classList.contains("trash") === true) {
+            let index = e.target.parentNode.parentNode.rowIndex;
+            const key = table1.rows[index].cells[1].firstChild.data;
+            const value = table1.rows[index].cells[2].firstChild.data;
+
+            Swal.fire({
+                title: "Memo app",
+                text:"LocalStorageから" +key +" "+ value+"を削除しますか",
+                type: "question",
+                showCancelButton: true
+            }).then((result) => {
+                if (result.value === true) {
+                    localStorage.removeItem(key);
+                    viewStorage();
+
+                    Swal.fire({
+                        title: "Memo app",
+                        text:"LocalStorageから" +key +" " +value +"を削除(delete)しました！",
+                        type: "success",
+                        allowOutsideClick: false
+                    });
+
+                    document.getElementById("textKey").value = "";
+                    document.getElementById("textMemo").value = "";
+                }
+            });
+        }
+    });
 };
 
 function allClearLocalStorage() {
@@ -178,21 +215,10 @@ function allClearLocalStorage() {
     allClear.addEventListener("click",
         function (e) {
             e.preventDefault();
-            // let w_confirm = confirm("LocalStorageのデータをすべて削除（allclear）します。\n よろしいですか。");
-            // // 値の入力チェック
-            // // if (w_confirm==true) {
-            // if (w_confirm) {
-
-            //     localStorage.clear();f
-            //     viewStorage();
-            //     let w_msg = `LocalStorageのデータすべて削除（all clear）しました。`;
-            //     window.alert(w_msg);
-            //     document.getElementById("textKey").value = "";
-            //     document.getElementById("textMemo").value = "";
-            // }
 
             Swal.fire({
-                title: "LocalStorageのデータをすべて削除（allclear）します。\n よろしいですか。",
+                title: "Memo app",
+                text: "LocalStorageのデータをすべて削除（allclear）します。\n よろしいですか。",
                 icon: "question",
                 showCancelButton: true,
                 confirmButtonText: "OK",
